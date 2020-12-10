@@ -1,0 +1,4 @@
+# ninja log v5
+2	16339	629340742	build.ninja	ff7a91d47055e6dd
+0	371	629340743	CMakeFiles/TCPClientTutorial.dir/TCPClientTutorial.cpp.obj	b4251b8c5f416827
+372	1532	629340744	TCPClientTutorial.exe	60465d8c69dd5142
