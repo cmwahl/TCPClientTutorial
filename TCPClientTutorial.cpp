@@ -55,8 +55,6 @@ int main()
 		// Prompt the user for some text
 		cout << "Gimme text: ";
 		getline(cin, userInput);
-		char enter;
-		cin >> enter;
 
 		if (userInput.size() > 0) {
 			// Send the text
