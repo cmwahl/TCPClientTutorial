@@ -2,12 +2,18 @@
 //
 
 #include "TCPClientTutorial.h"
-#include "w"
+#include <iostream>
+#include <string>
+#include <WS2tcpip.h>
+
+#pragma comment(lib, "ws2_32.lib")
 
 using namespace std;
 
 int main()
 {
-	cout << "Hello Client." << endl;
+	
+
+
 	return 0;
 }
