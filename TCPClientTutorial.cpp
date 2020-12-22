@@ -12,34 +12,36 @@ using namespace std;
 
 int main()
 {
-	string ipAddress = "127.0.0.1"; // Connecting to local host
+	// We need the information from the server side so we know where to connect to
+	string ipAddress = "10.0.0.16"; // Connecting to local host's ip address, "127.0.0.1"
 	int port = 54000; // Listening port # from server application
 
 	// Initialize WinSock
-	WSAData data;
-	WORD ver = MAKEWORD(2, 2);
-	int wsResult = WSAStartup(ver, &data);
+	WSAData data; // This'll hold our socket information
+	WORD ver = MAKEWORD(2, 2); // Version 2.2
+	int wsResult = WSAStartup(ver, &data); // Starts up the port stuff (Version, info about implementation information)
 	if (wsResult != 0) {
 		cerr << "Can't start Winsock, Err #: " << wsResult << endl;
 		return 1;
 	}
 
 	// Create Socket
-	SOCKET sock = socket(AF_INET, SOCK_STREAM, 0);
+	SOCKET sock = socket(AF_INET /*A family of addresses, ipv4*/, SOCK_STREAM /*tcp*/, 0 /*flag?*/);
 	if (sock == INVALID_SOCKET) {
 		cerr << "Can't create socket, Err #: " << WSAGetLastError() << endl;
-		WSACleanup();
+		WSACleanup(); // If failed, clean this 
 		return 2;
 	}
 
 	// Fill in hint structure
+	// This will hold the server side information, so we can connect to it
 	sockaddr_in hint; 
-	hint.sin_family = AF_INET;
-	hint.sin_port = htons(port);
-	inet_pton(AF_INET, ipAddress.c_str(), &hint.sin_addr);
+	hint.sin_family = AF_INET; // This is ip-4 address
+	hint.sin_port = htons(port); // Give it the port number (have to convert it to network byte ordering, big endian)
+	inet_pton(AF_INET, ipAddress.c_str(), &hint.sin_addr); // Also give hint our ipAddress in ip-4 format in big endian format
 
 	// Connect to Server
-	int connResult = connect(sock, (sockaddr*)&hint, sizeof(hint));
+	int connResult = connect(sock, (sockaddr*)&hint, sizeof(hint)); // Connect our socket to the hint location
 	if (connResult == SOCKET_ERROR) {
 		cerr << "Can't connect to server, Err #: " << WSAGetLastError() << endl;
 		closesocket(sock);
