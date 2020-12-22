@@ -13,7 +13,7 @@ using namespace std;
 int main()
 {
 	// We need the information from the server side so we know where to connect to
-	string ipAddress = "10.0.0.16"; // Connecting to local host's ip address, "127.0.0.1"
+	string ipAddress = "127.0.0.1"; // Connecting to local host's ip address, Local machine ip4: "127.0.0.1"
 	int port = 54000; // Listening port # from server application
 
 	// Initialize WinSock
